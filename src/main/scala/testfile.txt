@@ -1,0 +1,14 @@
+DESCRIPTION
+The javac tool reads class and interface definitions, written in the Java programming language, and compiles them into bytecode class files. It can also process annotations in Java source files and classes.
+
+There are two ways to pass source code file names to javac:
+
+For a small number of source files, simply list the file names on the command line.
+For a large number of source files, list the file names in a file, separated by blanks or line breaks. Then use the list file name on the javac command line, preceded by an @ character.
+Source code file names must have .java suffixes, class file names must have .class suffixes, and both source and class files must have root names that identify the class. For example, a class called MyClass would be written in a source file called MyClass.java and compiled into a bytecode class file called MyClass.class.
+
+Inner class definitions produce additional class files. These class files have names combining the inner and outer class names, such as MyClass$MyInnerClass.class.
+
+You should arrange source files in a directory tree that reflects their package tree. For example, if you keep all your source files in C:\workspace, the source code for com.mysoft.mypack.MyClass should be in C:\workspace\com\mysoft\mypack\MyClass.java.
+
+By default, the compiler puts each class file in the same directory as its source file. You can specify a separate destination directory with -d (see Options, below).

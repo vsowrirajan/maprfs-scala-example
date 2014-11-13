@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<?xml-stylesheet type="text/xsl" href="configuration.xsl"?>
+
+<!-- Put site-specific property overrides in this file. -->
+
+<configuration>
+  <property>
+    <name>fs.default.name</name>
+    <value>maprfs:///</value>
+  </property>
+  <property>
+    <name>hadoop.tmp.dir</name>
+    <value>/tmp/hadoop-${user.name}</value>
+    <description>A base for other temporary directories.</description>
+  </property>
+<property>
+  <name>fs.mapr.working.dir</name>
+  <value>/user/$USERNAME/</value>
+  <description>The default directory to be used with relative paths.
+  Note that $USERNAME is NOT an enviromental variable, but just a placeholder
+  to indicate that it will be expanded to the corresponding username.
+  Other example default directories could be "/", "/home/$USERNAME", "/$USERNAME" etc.
+  </description>
+</property>
+
+</configuration>

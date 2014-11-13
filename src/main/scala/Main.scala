@@ -8,12 +8,14 @@ object Main {
     val testText = "Example text "
     val appendFile = "testfile1.txt"
 
-    val emptyFile = "empty-file.txt" 
-    
+    val emptyFile = "empty-file.txt"
+
+    val fileService = new MapRfsFileService
+
     //Create an Empty file in MapRFS
 
     println("Creating an empty file")
-    MapRfsFileService.createNewFile(emptyFile)
+    fileService.createNewFile(emptyFile)
 
     //Creating a new file and saving it to MapRFS
 
@@ -24,17 +26,17 @@ object Main {
     testfileWriter.write(testText)
     testfileWriter.close
     println("Saving the file " + testfileName + " to MaprFs")
-    MapRfsFileService.createAndSave(testfileName)
+    fileService.createAndSave(testfileName)
 
     //Append to file in MapRFS
 
-    MapRfsFileService.appendToFile(testfileName,appendFile)
+    fileService.appendToFile(testfileName,appendFile)
     println("Appended text from "+ appendFile + " to "+testfileName)
 
      //Reading a file from MapRFS
 
     val outputStream = new FileOutputStream(new File(testfileName))
-    val in = MapRfsFileService.getFile(testfileName)
+    val in = fileService.getFile(testfileName)
     var b = new Array[Byte](1024)
     var numBytes = in.read(b)
     while (numBytes > 0) {
@@ -47,10 +49,11 @@ object Main {
     //Deleting a file from MapRFS
 
     println("Deleting the file " + emptyFile)
-    MapRfsFileService.deleteFile(emptyFile)
+    fileService.deleteFile(emptyFile)
+
+   //Close the FileSystem Handle
+    fileService.close
    }
 
-  //Close the FileSystem Handle
-   MapRfsFileService.close
   }
 

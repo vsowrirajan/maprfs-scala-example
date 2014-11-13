@@ -7,26 +7,26 @@ import java.io.InputStream
 import org.apache.hadoop.conf._
 import org.apache.hadoop.fs._
 
-object MapRfsFileService {
-  private var conf = new Configuration()
-  private var maprfsCoreSitePath = new Path("core-site.xml")
-  private var maprfsSitePath = new Path("maprfs-site.xml")
+class MapRfsFileService {
+  private val conf = new Configuration()
+  private val maprfsCoreSitePath = new Path("core-site.xml")
+  private val maprfsSitePath = new Path("maprfs-site.xml")
 
   conf.addResource(maprfsCoreSitePath)
   conf.addResource(maprfsSitePath)
 
-  private var fileSystem = FileSystem.get(conf)
+  private val fileSystem = FileSystem.get(conf)
 
   def mkdirs(folderPath: String): Unit = {
-   var path = new Path(folderPath)
+   val path = new Path(folderPath)
      if (!fileSystem.exists(path)) {
 	fileSystem.mkdirs(path)
      }
-  } 
+  }
 
  def createNewFile(filepath:String): Unit = {
-   var file = new File(filepath)
-   var out = fileSystem.createNewFile(new Path(file.getName))
+   val file = new File(filepath)
+   val out = fileSystem.createNewFile(new Path(file.getName))
    if(out)
      println("New file created as "+file.getName)
    else
@@ -34,8 +34,8 @@ object MapRfsFileService {
   }
 
   def createAndSave(filepath: String): Unit = {
-    var file = new File(filepath)
-    var out = fileSystem.create(new Path(file.getName))
+    val file = new File(filepath)
+    val out = fileSystem.create(new Path(file.getName))
     var in = new BufferedInputStream(new FileInputStream(file))
     var b = new Array[Byte](1024)
     var numBytes = in.read(b)
@@ -46,7 +46,7 @@ object MapRfsFileService {
     in.close()
     out.close()
   }
-  
+
  def appendToFile(tofilepath: String, fromfilepath: String): Unit = {
    var file = new File(tofilepath)
    var out = fileSystem.append(new Path(file.getName))

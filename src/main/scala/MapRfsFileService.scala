@@ -7,7 +7,7 @@ import java.io.InputStream
 import org.apache.hadoop.conf._
 import org.apache.hadoop.fs._
 
-class MapRfsFileService {
+object MapRfsFileService {
   private val conf = new Configuration()
   private val maprfsCoreSitePath = new Path("core-site.xml")
   private val maprfsSitePath = new Path("maprfs-site.xml")
